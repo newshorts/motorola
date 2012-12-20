@@ -52,29 +52,61 @@ table {
 }
 		</style>
             <style>
-                #wrap { background-color: #000; height: 598px; margin: 0 auto; position: relative; width: 100%; }
+                #wrap { background-color: #fff; height: 598px; margin: 0 auto; position: relative; width: 100%; }
                 #copy { background: url('http://work.goodbysilverstein.com/temp/motorola/search.png') top left no-repeat; float: right; height: 155px; margin-right: 35px; position: relative; top: 327px; width: 391px; }
                 #play_button { background: url('http://work.goodbysilverstein.com/temp/motorola/play2.png') top left no-repeat; float: right; height: 19px; position: relative; top: 297px; right: -230px; top: 495px; width: 145px; }
                 #play_button a { display: block; width: 100%; height: 100%; font-size: 20px; color: #fbfbfb; text-decoration: none; }
-                #fake_carousel_nav { background: url('http://work.goodbysilverstein.com/temp/motorola/fake_nav.png') 50% 0; height: 67px; margin: 0 auto; position: absolute; top: 531px; width: 100%; }
+                #fake_carousel_nav { background: url('nav-sprite.png') 50% 0px scroll repeat-x; height: 67px; margin: 0 auto; position: absolute; top: 531px; width: 100%; }
+                #fake_carousel_nav nav { width: 875px; height: 67px; margin: 0 auto; }
+                #fake_carousel_nav nav a { width: 291px; height: 67px; display: block; float: left; }
                 #luge  { width: 100%; position: absolute; bottom: 0; right: 0; }
                 #end_card {  width: 519px; margin: 0 auto; position: absolute; top: 50%; left: 50%; margin-left: -260px; margin-top: -219px; opacity: 0; }
-                .transition { transition: opacity .5s linear; -moz-transition: opacity .5s linear; -webkit-transition: opacity .5s linear; -o-transition: opacity .5s linear; }
+                .transition { transition: opacity .3s ease-out; -moz-transition: opacity .3s ease-out; -webkit-transition: opacity .3s ease-out; -o-transition: opacity .3s ease-out; }
+                .panel { width: 100%; height: 598px; position: absolute; bottom: 0; right: 0; text-align: center;}
+                .panel img { width: 1145px; margin-top: 15px; }
+                .videoLink {  }
+                .phoneScan { opacity: 0; }
+                .motoBack { opacity: 0; }
+                
             </style>
 	</head>
 	<body>
             <div id="wrap">
-                <video id="luge">
-                    <source src="videos/moto.webmsd.webm" type='video/webm' />
-                    <source src="videos/moto.webmhd.webm" type='video/webm' />
-                    <source src="videos/moto.mp4" type='video/mp4' />
-                    <source src="videos/movie.ogg" type='video/ogg' />
-                </video>
                 
-                <div id="copy"></div>
-                <div id="play_button"><a href="#"></a></div>
-                <div id="fake_carousel_nav"></div>
-                <a href="#" id="close_end_card"><img id="end_card" src="end-card.png" class="transition" /></a>
+                
+                
+                <div id="panels">
+                    <div class="panel phoneScan transition">
+                        <img src="phone-scan.png" />
+                    </div>
+                    <div class="panel motoBack transition">
+                        <img src="moto.png" />
+                    </div>
+                    <div class="panel videoLink transition">
+                        <video id="luge" preload="auto">
+                            <source src="videos/moto.webmsd.webm" type='video/webm' />
+                            <source src="videos/moto.webmhd.webm" type='video/webm' />
+                            <source src="videos/moto.mp4" type='video/mp4' />
+                            <source src="videos/movie.ogg" type='video/ogg' />
+                        </video>
+
+                        <div id="copy"></div>
+                        <div id="play_button"><a href="#"></a></div>
+                        
+                        <a href="#" id="close_end_card"><img id="end_card" src="end-card.png" class="transition" /></a>
+                    </div>
+                    
+                </div>
+                
+                    
+                <div id="fake_carousel_nav">
+                    <nav>
+                        <a id="videoLink" href="#" data-bgpos="0px"></a>
+                        <a id="phoneScan" href="#" data-bgpos="-67px"></a>
+                        <a id="motoBack" href="#" data-bgpos="-134px"></a>
+                    </nav>
+                </div>
+                
             </div>
             
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -101,11 +133,45 @@ table {
                             });
                             
                             $('#close_end_card').on('click', function(evt) {
+                                evt.preventDefault();
                                 $('#end_card').css({opacity: 0});
                                 $('#luge').css({
                                     '-webkit-filter': 'none' 
                                 });
                             });
+                            
+                            // nav link clicks
+                            
+                            $('nav').on('navEvent', function(evt, id) {
+                                
+                                $('.panel').each(function() {
+                                    if($(this).hasClass(id)) {
+                                        $(this).css({opacity: 1});
+                                    } else {
+                                        $(this).css({opacity: 0});
+                                    }
+                                    
+                                });
+                                
+                            });
+                            
+                            $('#fake_carousel_nav nav a').on('click', function(evt) {
+                                evt.preventDefault();
+                                
+                                var id = $(this).attr('id');
+                                
+                                $('nav').trigger('navEvent', [id]);
+                                
+                                var bgPos = $(this).data('bgpos');
+                                
+                                console.log(bgPos);
+                                
+                                $('#fake_carousel_nav').css({
+                                    'background-position' : '50% ' + bgPos
+                                });
+                            });
+                            
+                            
                             
                             
                         });
