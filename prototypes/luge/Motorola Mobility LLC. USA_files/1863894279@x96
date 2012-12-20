@@ -1,4 +1,0 @@
-/* B3/Motorola_Container_Data - Motorola_Container */
-var migID = '3513';
-try { lbLoad(migID, 'r|g', ''); }
-catch (e) { if (isInDebug) { console.log(e); } }

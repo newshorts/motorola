@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Untitled Page</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var dlx_na_id = readCookie('na_id');
+        var tfsmDLX = 'http://r.nexac.com/e/getdata.xgi?na_id=' + dlx_na_id + '&dt=br&pkey=eqbw69pemzv15&ru=';
+        var tfsmDLXcb = 'http://network.realmedia.com/2/247-Access/DLX_CallBack/1074382943@x96?_RM_HTML_NAID_=<na_id>%26_RM_HTML_NAMP_=<na_mp>%26_RM_HTML_NADA_=<na_da>';
+        if (dlx_na_id != null) { appendIframe(tfsmDLX + tfsmDLXcb, 'DLX'); }
+        /*else {
+            var trackingPixel = new Image(1, 1);
+            trackingPixel.src = 'http://network.realmedia.com/RealMedia/ads/adstream.cap?1074382943&c=dlx&va=f&e=1d';
+            trackingPixel = null;
+        }*/
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        function appendIframe(iFrameURL, iFrameID) {
+            try {
+                var pixel_iframe = document.createElement('iframe');
+                pixel_iframe.setAttribute('id', iFrameID + '_1074382943');
+                pixel_iframe.setAttribute('style', 'display:none');
+                pixel_iframe.style.cssText = 'display:none';
+                pixel_iframe.src = iFrameURL;
+                document.body.appendChild(pixel_iframe);
+                pixel_iframe = null;
+            }
+            catch (e) {}
+        }
+    </script>
+
+
+</body></html>
