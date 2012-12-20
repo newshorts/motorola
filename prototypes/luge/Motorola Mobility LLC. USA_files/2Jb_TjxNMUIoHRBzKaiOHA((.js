@@ -1,0 +1,2 @@
+
+try{Bootstrapper.setCurrentRuleId(16474);Bootstrapper.bindDOMParsed(function(){Bootstrapper.insertScript('http://pixel.mathtag.com/event/js?mt_id=10701&mt_adid=61&v1=&v2=&v3=&s1=Homepage&s2=&s3=&s4=');});;}catch(e){Bootstrapper.reportException(e);};

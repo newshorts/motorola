@@ -1,0 +1,7 @@
+/* B3/LightningBolt_Container_Data_Default - default */
+try {
+    lbLoad('', 'r|g', '');
+    appendIframe('http://network.realmedia.com/2/track_targeting/cookie/lb/940361546@x88?cAction=Add&cName=RTG&cValue=' + lbHost + '&cExpires=30&cAnalytics=RTG', 'rtg_default');
+    loadPixel('http://secure.adnxs.com/seg?member_id=364&add_code=TFSA-' + lbHost);
+}
+catch (e) { if (isInDebug) { console.log(e); } }
